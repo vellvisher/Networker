@@ -22,4 +22,10 @@
         	android:text="@string/profile_button"
         	android:onClick="profilePageButton"/>
      
+     <Button android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_marginTop="100dp"
+        	android:text="@string/social_button"
+        	android:onClick="showSocialActivity"/>
+     
 </RelativeLayout>

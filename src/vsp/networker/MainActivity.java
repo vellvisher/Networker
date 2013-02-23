@@ -66,7 +66,12 @@ public class MainActivity extends Activity implements  CreateNdefMessageCallback
 
 	public void profilePageButton(View view) {
 		
-		Intent profile_intent = new Intent(this,Profile.class);
-		startActivity(profile_intent);
-		}
+		Intent profileIntent = new Intent(this, Profile.class);
+		startActivity(profileIntent);
+	}
+	
+	public void showSocialActivity(View view) {
+		Intent socialActivity = new Intent(this, SocialActivity.class);
+		startActivity(socialActivity);
+	}
 }

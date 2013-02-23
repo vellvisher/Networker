@@ -5,14 +5,13 @@
     android:versionName="1.0" >
 
     <uses-permission android:name="android.permission.NFC" />
-    
+
     <uses-feature android:name="android.hardware.nfc" />
-    
+
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="17" />
 
-            
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -26,12 +25,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            
-			<intent-filter>
-        		<action android:name="android.nfc.action.NDEF_DISCOVERED" />
-        		<category android:name=	"android.intent.category.DEFAULT" />
-        		<data android:mimeType="application/vsp.networker" />
-			</intent-filter>            
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="application/vsp.networker" />
+            </intent-filter>
         </activity>
         <activity
             android:name="vsp.networker.SendPage"
@@ -60,5 +60,10 @@
             android:name="vsp.networker.Contacts"
             android:label="@string/title_activity_contacts" >
         </activity>
+        <activity
+            android:name="vsp.networker.SocialActivity"
+            android:label="@string/title_activity_social" >
+        </activity>
     </application>
+
 </manifest>
