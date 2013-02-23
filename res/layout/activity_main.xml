@@ -9,8 +9,9 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="@string/hello_world" />
-
+        android:text="@string/hello_world"
+        android:id ="@+id/hello_view"></TextView>
+        
     <Button android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:text="@string/send_button"
@@ -21,5 +22,11 @@
         	android:layout_marginTop="50dp"
         	android:text="@string/profile_button"
         	android:onClick="profilePageButton"/>
+     
+     <Button android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_marginTop="100dp"
+        	android:text="@string/social_button"
+        	android:onClick="showSocialActivity"/>
      
 </RelativeLayout>
