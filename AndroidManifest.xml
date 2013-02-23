@@ -4,9 +4,19 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
+    <uses-permission android:name="android.permission.NFC" />
+
+    <intent-filter>
+        <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
+        <category android:name="android.intent.category.DEFAULT" />
+
+        <data android:mimeType="text/plain" />
+    </intent-filter>
+
     <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="16" />
+        android:minSdkVersion="14"
+        android:targetSdkVersion="17" />
 
     <application
         android:allowBackup="true"
@@ -23,12 +33,27 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="vsp.networker.SendPage"
+            android:label="@string/title_activity_send_page" >
+        </activity>
+        <activity
+            android:name="vsp.networker.ReceivedDataActivity"
+            android:label="@string/title_activity_received_data" >
+        </activity>
+        <activity
+            android:name="vsp.networker.ReceivedActivity"
+            android:label="@string/title_activity_received" >
+        </activity>
+        <activity
             android:name="vsp.networker.ProfilepageActivity"
-            android:label="@string/title_activity_profilepage"
             android:parentActivityName="src.vsp.networker.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="src.vsp.networker.MainActivity" />
+        </activity>
+        <activity
+            android:name="vsp.networker.Profile"
+            android:label="@string/title_activity_profile" >
         </activity>
     </application>
 

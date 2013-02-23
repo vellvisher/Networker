@@ -3,15 +3,21 @@
 
     <string name="app_name">Networker</string>
     <string name="hello_world">Hello world!</string>
-    <strong name="name_input">Name</strong>
-    <strong name="email_input">Email</strong>
-    <strong name="Phone_input">Email</strong>
-    <strong name="Professional_details_output">Email</strong>
-    <strong name="Designation_input">Email</strong>
-    <strong name="Department_input">Email</strong>
-    <strong name="Company_name_input">Email</strong>
-    <strong name="Company_address_input">Email</strong>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_profilepage">personal details</string>
+    <string name="title_activity_send_page">SendPage</string>
+    <string name="title_activity_received_data">ReceivedDataActivity</string>
+    <string name="title_activity_received">ReceivedActivity</string>
+    <string name="send_page_string">Sending data page</string>
     <string name="action_settings">Settings</string>
+    <string name="name_input">Name</string>
+    <string name="email_input">Email</string>
+    <string name="Phone_input">Email</string>
+    <string name="Professional_details_output">Email</string>
+    <string name="Designation_input">Email</string>
+    <string name="Department_input">Email</string>
+    <string name="Company_name_input">Email</string>
+    <string name="Company_address_input">Email</string>
+
+    <string name="title_activity_profile">Profile</string>
+
 </resources>
