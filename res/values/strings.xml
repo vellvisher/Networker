@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">Networker</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
@@ -9,15 +8,17 @@
     <string name="title_activity_received">ReceivedActivity</string>
     <string name="send_page_string">Sending data page</string>
     <string name="action_settings">Settings</string>
+    <!-- Profile Page Details -->
+    <string name="create_message">Create Business Card</string>
+     <string name="personal_output">Personal Details</string>
     <string name="name_input">Name</string>
     <string name="email_input">Email</string>
-    <string name="Phone_input">Email</string>
-    <string name="Professional_details_output">Email</string>
-    <string name="Designation_input">Email</string>
-    <string name="Department_input">Email</string>
-    <string name="Company_name_input">Email</string>
-    <string name="Company_address_input">Email</string>
-
+    <string name="phone_input">Phone No</string>
+    <string name="professional_details_output">Professional Details</string>
+    <string name="designation_input">Designation</string>
+    <string name="department_input">Department</string>
+    <string name="company_name_input">Company Name</string>
+    <string name="submit_button">Submit</string>
+    <string name="company_address_input">Company address</string>
     <string name="title_activity_profile">Profile</string>
-
 </resources>
