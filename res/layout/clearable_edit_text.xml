@@ -23,15 +23,5 @@ android:layout_height="wrap_content"
     android:background="@android:color/background_dark"
     android:src="@android:drawable/ic_input_delete" />
 
-<ImageButton
-    android:id="@+id/imageButton1"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="15dp"
-    android:layout_marginRight="10dp"
-    android:layout_alignParentRight="true"
-    android:layout_marginLeft="11dp"
-    android:background="@android:color/transparent"
-    android:src="@android:drawable/ic_input_add" />
 
 </RelativeLayout>
