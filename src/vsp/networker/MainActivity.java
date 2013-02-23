@@ -47,10 +47,10 @@ public class MainActivity extends Activity implements  CreateNdefMessageCallback
 //			Intent intent = new Intent(this, SendPage.class);
 //			startActivity(intent);
 			System.out.println("nirvana");
-			TextView textView = (TextView) findViewById(R.id.hello_view);
-			NdefMessage msg = (NdefMessage) rawMsgs[0];
-			System.out.println("Got this - " +new String(msg.getRecords()[0].getPayload()));
-			textView.setText(new String(msg.getRecords()[0].getPayload()));	
+//			TextView textView = (TextView) findViewById(R.id.hello_view);
+//			NdefMessage msg = (NdefMessage) rawMsgs[0];
+//			System.out.println("Got this - " +new String(msg.getRecords()[0].getPayload()));
+//			textView.setText(new String(msg.getRecords()[0].getPayload()));	
 		}
 	}
 
@@ -63,4 +63,10 @@ public class MainActivity extends Activity implements  CreateNdefMessageCallback
         });
         return msg;
 	}
+
+	public void profilePageButton(View view) {
+		
+		Intent profile_intent = new Intent(this,Profile.class);
+		startActivity(profile_intent);
+		}
 }

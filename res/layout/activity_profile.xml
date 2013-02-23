@@ -1,15 +1,117 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Profile" >
 
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools" 
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="2dp"
+    tools:context=".Profile" >
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world" 
-        android:id="@+id/hello_view"/>
+        android:paddingTop="16dp"
+        android:textStyle="bold"
+        android:textSize="26sp"
+        android:paddingBottom="16dp"
+        android:text="@string/create_message" />
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:paddingBottom="16dp"
+         android:paddingTop="16dp"
+        android:text="@string/personal_output" />
 
-</RelativeLayout>
+      <EditText
+          android:id="@+id/editText1"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:ems="10"
+          android:hint="@string/name_input"
+          android:inputType="textPersonName" >
+          <requestFocus />
+      </EditText>
+
+      <EditText
+          android:id="@+id/editText2"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:ems="10"
+          android:hint="@string/email_input"
+          android:inputType="textEmailAddress" />
+
+      <EditText
+          android:id="@+id/editText3"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:ems="10"
+          android:hint="@string/phone_input"
+          android:inputType="phone" />
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:paddingBottom="16dp"
+          android:paddingTop="16dp"
+          android:textStyle="bold"
+          android:text="@string/professional_details_output" />
+
+       <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/designation_input" />
+        <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/department_input" />
+         <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/company_name_input" />
+
+         <EditText
+             android:id="@+id/editText4"
+             android:layout_width="186dp"
+             android:layout_height="wrap_content"
+             android:ems="10"
+             android:hint="@string/company_address_input"
+             android:inputType="textPostalAddress" />
+       
+         <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:paddingBottom="16dp"
+          android:paddingTop="16dp"
+          android:textStyle="bold"
+          android:text="@string/social_media_details" />
+
+       <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/facebook_account" />
+        <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/twitter_account" />
+         <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/linkedin_account" /> 
+          <Button
+              android:id="@+id/button1"
+              android:layout_width="80dp"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="170dp"
+              android:layout_marginTop="80dp"
+              android:layout_marginBottom="80dp"
+              android:background="#000000"
+              android:hint="@string/submit_button"
+              android:paddingLeft="1dp"
+              android:onClick="submitButton" />  
+</LinearLayout>
+</ScrollView>
