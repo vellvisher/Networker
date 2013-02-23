@@ -9,5 +9,6 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="@string/send_page_string" />
+        android:text="@string/send_page_string"
+    	android:id = "@+id/send_view"/>
 </RelativeLayout>
