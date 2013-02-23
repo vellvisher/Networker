@@ -23,7 +23,8 @@ public class MainActivity extends Activity implements  CreateNdefMessageCallback
 		System.out.println("create");
 		setContentView(R.layout.activity_main);
 		nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-		nfcAdapter.setNdefPushMessageCallback(this, this);
+		//nfcAdapter.setNdefPushMessageCallback(this, this);
+		nfcAdapter.setNdefPushMessage(this.createNdefMessage(null), this, this);
 	}
 
 	@Override
