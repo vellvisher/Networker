@@ -2,7 +2,9 @@ package vsp.networker;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
+import android.view.View;
 
 public class Profile extends Activity {
 
@@ -18,5 +20,9 @@ public class Profile extends Activity {
 		getMenuInflater().inflate(R.menu.activity_profile, menu);
 		return true;
 	}
-
+	
+	public void submitButton(View view) {
+		Intent create_event = new Intent(this,Contacts.class);
+		startActivity(create_event);
+	}
 }

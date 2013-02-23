@@ -25,5 +25,12 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent(this, SendPage.class);
 		startActivity(intent);
 	}
+	
+	public void profilePageButton(View view) {
+		
+		Intent profile_intent = new Intent(this,Profile.class);
+		startActivity(profile_intent);
+		}
 
+	
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Networker</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
@@ -10,9 +11,10 @@
     <string name="send_page_string">Sending data page</string>
     <string name="action_settings">Settings</string>
     <!-- Profile Page Details -->
-    <string name="create_message">Create Business Card</string>
-     <string name="personal_output">Personal Details</string>
-    <string name="name_input">Name</string>
+    <string name="profile_button">profile</string>
+    <string name="create_message">Create your business card</string>
+    <string name="personal_output">Personal Details</string>
+    <string name="name_input">FirstName LastName</string>
     <string name="email_input">Email</string>
     <string name="phone_input">Phone No</string>
     <string name="professional_details_output">Professional Details</string>
@@ -22,4 +24,13 @@
     <string name="submit_button">Submit</string>
     <string name="company_address_input">Company address</string>
     <string name="title_activity_profile">Profile</string>
+    <string name="title_activity_contacts">Contacts</string>
+    <!-- Social Media Details -->
+    <string name="social_media_details">Social Media Details</string>
+    <string name="facebook_account">Facebook Account</string>
+    <string name="twitter_account">Twitter Account</string>
+    <string name="linkedin_account">LinkedIn Account</string> 
+    <!-- editable-text -->   
+      <string name="create_event">Event Name</string> 
+    
 </resources>

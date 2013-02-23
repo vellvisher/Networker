@@ -55,6 +55,10 @@
             android:name="vsp.networker.Profile"
             android:label="@string/title_activity_profile" >
         </activity>
+        <activity
+            android:name="vsp.networker.Contacts"
+            android:label="@string/title_activity_contacts" >
+        </activity>
     </application>
 
 </manifest>
