@@ -6,15 +6,15 @@ import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 public class ClearableEditText extends RelativeLayout
 {
 LayoutInflater inflater = null;
 EditText edit_text;
-Button btn_clear;
+ImageButton btn_clear;
 
 public ClearableEditText(Context context, AttributeSet attrs, int defStyle)
 {
@@ -38,9 +38,9 @@ initViews();
 void initViews()
 {
 inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-inflater.inflate(R.layout.activity_contacts, this, true);
+inflater.inflate(R.layout.clearable_edit_text, this, true);
 edit_text = (EditText) findViewById(R.id.clearable_edit);
-btn_clear = (Button) findViewById(R.id.clearable_button_clear);
+btn_clear = (ImageButton) findViewById(R.id.imageButton1);
 btn_clear.setVisibility(RelativeLayout.INVISIBLE);
 clearText();
 showHideClearButton();

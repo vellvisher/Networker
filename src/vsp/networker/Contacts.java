@@ -3,16 +3,15 @@ package vsp.networker;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
-import android.widget.LinearLayout;
 
-public class Contacts extends Activity
+public class Contacts extends Activity 
 {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_contacts);
-		
+		 
 	}
 
 	@Override
@@ -21,5 +20,4 @@ public class Contacts extends Activity
 		getMenuInflater().inflate(R.menu.contacts, menu);
 		return true;
 	}
-
 }

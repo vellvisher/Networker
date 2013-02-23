@@ -31,6 +31,6 @@
     <string name="twitter_account">Twitter Account</string>
     <string name="linkedin_account">LinkedIn Account</string> 
     <!-- editable-text -->   
-      <string name="create_event">Event Name</string> 
+      <string name="create_event">Add Folder</string> 
     
 </resources>
