@@ -44,13 +44,13 @@ public class MainActivity extends Activity implements  CreateNdefMessageCallback
 		Parcelable[] rawMsgs;
 		System.out.println(getIntent().getAction());
 		if((rawMsgs = getIntent().getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)) != null) {
-//			Intent intent = new Intent(this, SendPage.class);
-//			startActivity(intent);
+			//Intent intent = new Intent(this, SendPage.class);
+			//startActivity(intent);
 			System.out.println("nirvana");
-//			TextView textView = (TextView) findViewById(R.id.hello_view);
-//			NdefMessage msg = (NdefMessage) rawMsgs[0];
-//			System.out.println("Got this - " +new String(msg.getRecords()[0].getPayload()));
-//			textView.setText(new String(msg.getRecords()[0].getPayload()));	
+			TextView textView = (TextView) findViewById(R.id.hello_view);
+			NdefMessage msg = (NdefMessage) rawMsgs[0];
+			System.out.println("Got this - " +new String(msg.getRecords()[0].getPayload()));
+			textView.setText(new String(msg.getRecords()[0].getPayload()));	
 		}
 	}
 
