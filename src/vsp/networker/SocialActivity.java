@@ -9,6 +9,9 @@ import org.scribe.model.Verb;
 import org.scribe.oauth.OAuthService;
 
 import android.app.Activity;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -29,6 +32,18 @@ public class SocialActivity extends Activity {
 		getMenuInflater().inflate(R.menu.activity_social, menu);
 		return true;
 	}
+	
+	public boolean isNetworkAvailable() {
+	    ConnectivityManager cm = (ConnectivityManager) 
+	      getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+	    // if no network is available networkInfo will be null
+	    // otherwise check if we are connected
+	    if (networkInfo != null && networkInfo.isConnected()) {
+	        return true;
+	    }
+	    return false;
+	} 
 	
 	public void authenticateTwitter(View view) {
 		OAuthService service = new ServiceBuilder()
