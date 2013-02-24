@@ -123,7 +123,7 @@ System.out.print(">>");
 
 				System.out.println(request.getBodyContents());
 				service.signRequest(accessToken, request);
-				User.socialMediaKeys.put(User.TWITTER, new AccessTokenSecretKeyPair(accessToken.getToken(), 
+				User.currentUser.socialMediaKeys.put(User.TWITTER, new AccessTokenSecretKeyPair(accessToken.getToken(), 
 						accessToken.getSecret()));
 				Response response = request.send();
 				System.out.println("Got it! Lets see what we found...");
@@ -135,7 +135,7 @@ System.out.print(">>");
 				int end= Body.indexOf("\"", start);
 				String id = (String) Body.subSequence(start, end);
 				System.out.println(id);
-				User.getDetails().put(User.TWITTER_ID, id);
+				User.currentUser.getDetails().put(User.TWITTER_ID, id);
 				
 				System.out.println();
 				System.out.println("Thats it man! Go and build something awesome with Scribe! :)");
