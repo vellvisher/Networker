@@ -27,6 +27,7 @@ public class Contacts extends Activity
 
 	    gridview.setOnItemClickListener(new OnItemClickListener() {
 	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+	        	System.out.println("itemhere");
 	            Toast.makeText(Contacts.this, "" + position, Toast.LENGTH_SHORT).show();
 	        }
 	    });
@@ -43,10 +44,11 @@ public class Contacts extends Activity
 		
 	clrObj =(ClearableEditText) findViewById(R.id.edit_text_clearable);
 	String text = clrObj.getText().toString();
+	if(!text.contentEquals("")) {
     EventList.getList().add(text);
     imgAdapter.notifyDataSetChanged();
     gridview.setAdapter(imgAdapter);
 	clrObj.emptyText();
-	
+	}
 	}
 }
