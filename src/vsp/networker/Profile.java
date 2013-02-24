@@ -31,7 +31,9 @@ public class Profile extends Activity {
 	
 	public void submitButton(View view) {
 	
-		String name =  findViewById(R.id.editText1).toString();
+		String name =  findViewById(R.id.editText1).toString().trim();
+		String firstName = name.substring(0, name.lastIndexOf(' '));
+		String lastName = name.substring(name.lastIndexOf(' ')+1);
 		String email =  findViewById(R.id.editText2).toString();
 		String phoneNo =  findViewById(R.id.editText3).toString();
 		String designation =  findViewById(R.id.designation).toString();
@@ -41,7 +43,10 @@ public class Profile extends Activity {
 		Intent create_event = new Intent(this,Contacts.class);
 		HashMap<String,String> profDetails= User.getProfessionalDetailsMap(designation, department,
 			companyName,companyAddress);
-		User usr = new User(name,email,phoneNo,"",profDetails);
+		User usr = new User(name, email, phoneNo, "", profDetails);
+		usr.details.put(User.USER_FIRST_NAME, firstName);
+		usr.details.put(User.USER_LAST_NAME, lastName);
+		User.currentUser.details = usr.details;
 		startActivity(create_event);
 	}
 }

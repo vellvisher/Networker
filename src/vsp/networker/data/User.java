@@ -13,6 +13,8 @@ public class User {
 	}
 	
 	public static final String USER_NAME = "name";
+	public static final String USER_FIRST_NAME = "firstName";
+	public static final String USER_LAST_NAME = "lastName";
 	public static final String USER_PHONE_NUMBER = "phoneNumber";
 	public static final String USER_EMAIL = "email";
 	public static final String USER_WEBSITE = "website";

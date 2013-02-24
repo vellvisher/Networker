@@ -79,7 +79,7 @@ public class MainActivity extends Activity implements  CreateNdefMessageCallback
 				if(otherUserObject.get(User.LINKEDIN_ID) != null) {
 					//Follow on twitter using api
 					//LinkedIn
-					//oooo.followContact(User.FIRST_NAME, User.LAST_NAME, USER.EMAIL);
+					//oooo.followContact(User.USER_FIRST_NAME, User.USER_LAST_NAME, USER.USER_EMAIL);
 				}
 				
 				// add user details to android event
