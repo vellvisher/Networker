@@ -87,7 +87,7 @@ public class Profile extends Activity {
 		for(String key : profDetails.keySet()) {
 			User.currentUser.details.put(key, profDetails.get(key));
 		}
-		
+		MainActivity.saveData(this);
 		Intent create_event = new Intent(this, Contacts.class);
 		startActivity(create_event);
 	}

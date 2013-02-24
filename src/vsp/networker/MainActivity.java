@@ -131,7 +131,7 @@ public class MainActivity extends Activity implements  CreateNdefMessageCallback
 	public NdefMessage createNdefMessage(NfcEvent arg0) {
         //String text = ("Beam me up, Android!\n\n" +
         //        "Beam Time: " + System.currentTimeMillis());
-		loadData(this);
+		if (!loadData(this)) profilePageButton(null);
         if (User.currentUser == null || User.currentUser.details == null) return null;
 		JSONObject userData = new JSONObject(User.currentUser.details);
         String text = userData.toString();
@@ -152,7 +152,7 @@ public class MainActivity extends Activity implements  CreateNdefMessageCallback
 		startActivity(socialActivity);
 	}
 	
-	public void loadData(Context context) {
+	public static boolean loadData(Context context) {
 		FileInputStream fis;
 		boolean firstTime = false;
 		try {
@@ -163,7 +163,7 @@ public class MainActivity extends Activity implements  CreateNdefMessageCallback
 		} catch (FileNotFoundException e) {
 			User.currentUser = new User();
 			User.currentUser.details = new HashMap<String, String>();
-			saveData(this);
+			saveData(context);
 			firstTime = true;
 		} catch (OptionalDataException e) {
 			e.printStackTrace();
@@ -176,10 +176,10 @@ public class MainActivity extends Activity implements  CreateNdefMessageCallback
 				User.currentUser.details.get(User.USER_NAME) == null || 
 				"".equals(User.currentUser.details.get(User.USER_NAME)))
 			firstTime = true;
-		if(firstTime) profilePageButton(null);
+		return !firstTime;
 	}
 	
-	public void saveData(Context context){
+	public static void saveData(Context context){
 		try {
 			FileOutputStream fos = context.openFileOutput(USER_DATA_FILENAME, Context.MODE_PRIVATE);
 			ObjectOutputStream os = new ObjectOutputStream(fos);

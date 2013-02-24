@@ -72,7 +72,7 @@ public class LinkedInActivity extends Activity implements Runnable
 	}
 	
 	public void run(){
-		OAuthService service = new ServiceBuilder()
+		service = new ServiceBuilder()
         .provider(LinkedInApi.withScopes("r_emailaddress+r_network+w_messages"))
         .apiKey("q3w3wlvc0ii5")
         .apiSecret("bfXAk13oRgfBG6aP")
@@ -84,7 +84,7 @@ System.out.println();
 
 // Obtain the Request Token
 System.out.println("Fetching the Request Token...");
-Token requestToken = service.getRequestToken();
+requestToken = service.getRequestToken();
 System.out.println("Got the Request Token!");
 System.out.println();
 
@@ -111,6 +111,12 @@ System.out.println();
 			
 			@Override
 			public void run() {
+				service = new ServiceBuilder()
+		        .provider(LinkedInApi.withScopes("r_emailaddress+r_network+w_messages"))
+		        .apiKey("q3w3wlvc0ii5")
+		        .apiSecret("bfXAk13oRgfBG6aP")
+		        .build();
+
 				verifier = new Verifier(verifierValue);
 				System.out.println();
 
@@ -134,7 +140,7 @@ System.out.println();
 			    String Body = response.getBody();
 			    int start=Body.indexOf("email-address");
 			    start+=14;
-			    int end= Body.indexOf("<", start);
+			    int end = Body.indexOf("<", start);
 			    String id = (String) Body.subSequence(start, end);
 				User.currentUser.getDetails().put(User.LINKEDIN_ID, id);
 				
