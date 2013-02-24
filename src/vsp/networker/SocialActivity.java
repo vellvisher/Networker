@@ -163,35 +163,24 @@ System.out.print(">>");
 		
 	}
 	
-	public void followContact(){
+	public void followContact(String ID){
 		
 		OAuthRequest request = new OAuthRequest(Verb.GET, FOLLOWING_RESOURCE_URL);
-		
-
-
-		System.out.println(request.getBodyContents());
-		service.signRequest(User.getaccessToken(), request);
-		User.socialMediaKeys.put(User.TWITTER, new AccessTokenSecretKeyPair(accessToken.getToken(), 
-				accessToken.getSecret()));
+		request.addBodyParameter("user_id", ID);
+		request.addBodyParameter("follow", "true");
+		String userAccessToken = User.currentUser.socialMediaKeys.get(User.TWITTER).accessToken;
+		String userSecretKey = User.currentUser.socialMediaKeys.get(User.TWITTER).secretKey;
+		Token accessToken = new Token(userAccessToken, userSecretKey);
+		service.signRequest(accessToken, request);
 		Response response = request.send();
 		System.out.println("Got it! Lets see what we found...");
 		System.out.println();
 		System.out.println(response.getBody());
-		String Body = response.getBody();
-		int start=Body.indexOf("id_str");
-		start+=9;
-		int end= Body.indexOf("\"", start);
-		String id = (String) Body.subSequence(start, end);
-		System.out.println(id);
-		User.getDetails().put(User.TWITTER_ID, id);
 		
-		System.out.println();
-		System.out.println("Thats it man! Go and build something awesome with Scribe! :)");
-
 	
 	
-	}
 	}
 }
+
 
 
