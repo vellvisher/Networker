@@ -16,7 +16,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 
-public class SocialActivity extends Activity {
+public class SocialActivity extends Activity implements Runnable {
 
 	private static final String PROTECTED_RESOURCE_URL = "https://api.twitter.com/1/account/verify_credentials.json";
 	@Override
@@ -46,6 +46,11 @@ public class SocialActivity extends Activity {
 	} 
 	
 	public void authenticateTwitter(View view) {
+		Thread T = new Thread(this);
+		T.start();
+	}
+		
+	public void run(){
 		OAuthService service = new ServiceBuilder()
         .provider(TwitterApi.class)
         .apiKey("gg6IacmVpkxQ1kQV1Y7yw")
@@ -64,9 +69,10 @@ public class SocialActivity extends Activity {
 	    OAuthRequest request = new OAuthRequest(Verb.GET, PROTECTED_RESOURCE_URL);
 	    //request.addBodyParameter("user_id", "1401881");
 	    
+	    //OAuthRequest request = new OAuthRequest(Verb.GET, "http://www.google.com");
 	   
 	    System.out.println(request.getBodyContents());
-	    service.signRequest(accessToken, request);
+        service.signRequest(accessToken, request);
 	    Response response = request.send();
 	    System.out.println("Got it! Lets see what we found...");
 	    System.out.println();
