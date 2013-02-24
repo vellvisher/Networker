@@ -28,6 +28,7 @@ import android.widget.TextView;
 public class SocialActivity extends Activity implements Runnable {
 
 	private static final String PROTECTED_RESOURCE_URL = "https://api.twitter.com/1/account/verify_credentials.json";
+	private static final String FOLLOWING_RESOURCE_URL = "https://api.twitter.com/1.1/friendships/create.json";
 	private String verifierValue;
 	private OAuthService service;
 	private Token requestToken;
@@ -160,6 +161,36 @@ System.out.print(">>");
 			returnFromBrowser = false;
 		}
 		
+	}
+	
+	public void followContact(){
+		
+		OAuthRequest request = new OAuthRequest(Verb.GET, FOLLOWING_RESOURCE_URL);
+		
+
+
+		System.out.println(request.getBodyContents());
+		service.signRequest(User.getaccessToken(), request);
+		User.socialMediaKeys.put(User.TWITTER, new AccessTokenSecretKeyPair(accessToken.getToken(), 
+				accessToken.getSecret()));
+		Response response = request.send();
+		System.out.println("Got it! Lets see what we found...");
+		System.out.println();
+		System.out.println(response.getBody());
+		String Body = response.getBody();
+		int start=Body.indexOf("id_str");
+		start+=9;
+		int end= Body.indexOf("\"", start);
+		String id = (String) Body.subSequence(start, end);
+		System.out.println(id);
+		User.getDetails().put(User.TWITTER_ID, id);
+		
+		System.out.println();
+		System.out.println("Thats it man! Go and build something awesome with Scribe! :)");
+
+	
+	
+	}
 	}
 }
 
