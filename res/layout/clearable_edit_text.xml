@@ -8,9 +8,8 @@ android:layout_height="wrap_content"
     android:id="@+id/clearable_edit"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    
     android:ems="10"
-    android:layout_marginTop="22dp"
-    android:layout_marginLeft="22dp"
     android:hint="@string/create_event"
     android:paddingRight="35dip" />
 
@@ -20,8 +19,9 @@ android:layout_height="wrap_content"
     android:layout_height="30dip"
     android:layout_alignRight="@+id/clearable_edit"
     android:layout_alignTop="@+id/clearable_edit"
-    android:background="@android:color/background_dark"
-    android:src="@android:drawable/ic_input_delete" />
+    android:background="@android:color/white"
+    android:layout_marginTop="8dp"
+    android:src="@drawable/cross"></ImageButton>
 
 
 </RelativeLayout>

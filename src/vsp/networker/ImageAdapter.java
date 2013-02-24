@@ -13,20 +13,19 @@ import android.widget.TextView;
 
 public class ImageAdapter extends BaseAdapter {
     private Context context;
-    private ArrayList<String> arrList;
+    
     
     private Integer folderImage = R.drawable.android_folder;   
     public ImageAdapter(Context c) {
         context = c;
-        arrList=EventList.getList();
     }
   
     public String getEventName(int position) {
-    	return arrList.get(position);
+    	return ListBook.getListName(position);
     }
     
     public int getCount() {
-        return arrList.size();
+        return ListBook.Size();
     }
 
     public Object getItem(int position) {
@@ -40,7 +39,6 @@ public class ImageAdapter extends BaseAdapter {
     // create a new ImageView for each item referenced by the Adapter
     public View getView(int position, View convertView, ViewGroup parent) {
     	View MyView = convertView;
-       
     	if (convertView == null) {
     	/* we define the view that will display on the grid */
 
@@ -60,8 +58,4 @@ public class ImageAdapter extends BaseAdapter {
     	return MyView;
     }
 
-  
-    
-    
- 
 }

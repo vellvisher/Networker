@@ -6,22 +6,41 @@ import vsp.networker.data.User;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ScrollView;
 
 public class Profile extends Activity {
 
-	LayoutInflater inflater = null;
+	private LayoutInflater inflater = null;
+	private ScrollView scrollBg;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profile);
+
+		
+		scrollBg = (ScrollView)findViewById(R.id.scrollview);
+		scrollBg.setOnTouchListener(new OnTouchListener() {
+
+	        @Override
+	        public boolean onTouch(View v, MotionEvent event) {
+	            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+	            imm.hideSoftInputFromWindow(scrollBg.getWindowToken(), 0);
+	            return false;
+	        }
+	    });
+		
 		AccountManager am = AccountManager.get(this); // "this" references the current Context
 
 		Account[] accounts = am.getAccountsByType("com.google");
@@ -51,6 +70,7 @@ public class Profile extends Activity {
 		if (!"".equals(displayName)) nameField.setText(displayName);
 		c.close();
 	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
