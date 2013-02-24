@@ -15,6 +15,9 @@ import vsp.networker.data.User;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -43,6 +46,18 @@ public class SocialActivity extends Activity implements Runnable {
 		getMenuInflater().inflate(R.menu.activity_social, menu);
 		return true;
 	}
+	
+	public boolean isNetworkAvailable() {
+	    ConnectivityManager cm = (ConnectivityManager) 
+	      getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+	    // if no network is available networkInfo will be null
+	    // otherwise check if we are connected
+	    if (networkInfo != null && networkInfo.isConnected()) {
+	        return true;
+	    }
+	    return false;
+	} 
 	
 	public void authenticateTwitter(View view) {
 		Thread T = new Thread(this);
