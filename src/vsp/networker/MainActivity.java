@@ -1,7 +1,20 @@
 package vsp.networker;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import vsp.networker.data.User;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
@@ -17,6 +30,8 @@ import android.widget.TextView;
 @SuppressLint("NewApi")
 public class MainActivity extends Activity implements  CreateNdefMessageCallback {
 	NfcAdapter nfcAdapter;
+	public static final String USER_DATA_FILENAME = "data_file";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -52,15 +67,36 @@ public class MainActivity extends Activity implements  CreateNdefMessageCallback
 			System.out.println("nirvana");
 			TextView textView = (TextView) findViewById(R.id.hello_view);
 			NdefMessage msg = (NdefMessage) rawMsgs[0];
+			String data = new String(msg.getRecords()[0].getPayload());
 			System.out.println("Got this - " +new String(msg.getRecords()[0].getPayload()));
 			textView.setText(new String(msg.getRecords()[0].getPayload()));	
+			try {
+				JSONObject otherUserObject = new JSONObject(data);
+				if(otherUserObject.get(User.TWITTER_ID) != null) {
+					//Follow on twitter using api
+					// oooo.followContact(twitterId);
+				}
+				if(otherUserObject.get(User.LINKEDIN_ID) != null) {
+					//Follow on twitter using api
+					//LinkedIn
+					//oooo.followContact(User.FIRST_NAME, User.LAST_NAME, USER.EMAIL);
+				}
+				
+				// add user details to android event
+				
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
 	@Override
 	public NdefMessage createNdefMessage(NfcEvent arg0) {
-        String text = ("Beam me up, Android!\n\n" +
-                "Beam Time: " + System.currentTimeMillis());
+        //String text = ("Beam me up, Android!\n\n" +
+        //        "Beam Time: " + System.currentTimeMillis());
+        JSONObject userData = new JSONObject(User.currentUser.details);
+        String text = userData.toString();
         NdefMessage msg = new NdefMessage(
         		new NdefRecord[] { NdefRecord.createMime("application/vsp.networker", text.getBytes())
         });
@@ -77,4 +113,19 @@ public class MainActivity extends Activity implements  CreateNdefMessageCallback
 		Intent socialActivity = new Intent(this, SocialActivity.class);
 		startActivity(socialActivity);
 	}
+	
+	public static void loadData(Context context) throws StreamCorruptedException, IOException, ClassNotFoundException {
+		FileInputStream fis = context.openFileInput(USER_DATA_FILENAME);
+		ObjectInputStream is = new ObjectInputStream(fis);
+		User.currentUser = (User) is.readObject();
+		is.close();
+	}
+	
+	public static void saveData(Context context) throws IOException {
+		FileOutputStream fos = context.openFileOutput(USER_DATA_FILENAME, Context.MODE_PRIVATE);
+		ObjectOutputStream os = new ObjectOutputStream(fos);
+		os.writeObject(User.currentUser);
+		os.close();
+	}
+
 }
