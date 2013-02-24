@@ -11,11 +11,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import vsp.networker.data.User;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
@@ -23,6 +24,8 @@ import android.nfc.NfcAdapter.CreateNdefMessageCallback;
 import android.nfc.NfcEvent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.ContactsContract.RawContacts.Data;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
@@ -82,8 +85,16 @@ public class MainActivity extends Activity implements  CreateNdefMessageCallback
 					//oooo.followContact(User.USER_FIRST_NAME, User.USER_LAST_NAME, USER.USER_EMAIL);
 				}
 				
+				/*
 				// add user details to android event
-				
+				ContentValues values = new ContentValues();
+	            values.put(Data.RAW_CONTACT_ID, 001);
+	            values.put(Data.MIMETYPE, Phone.CONTENT_ITEM_TYPE);
+	            values.put(Phone.NUMBER, otherUserObject.getString(User.USER_PHONE_NUMBER));
+	            values.put(Phone.TYPE, Phone.TYPE_CUSTOM);
+	            values.put(Phone.LABEL, "");
+	            Uri dataUri = getContentResolver().insert(android.provider.ContactsContract.Data.CONTENT_URI, values);
+				*/
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
