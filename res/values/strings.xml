@@ -36,5 +36,7 @@
     <string name="title_activity_social">SocialActivity</string>
     <!-- Social Page -->
     <string name="twitter_button">Twiiter</string>
+    <string name="edit_text_social">Enter authorization code</string>
+    <string name="submitButton">Submit</string>
     
 </resources>
