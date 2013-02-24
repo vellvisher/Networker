@@ -132,7 +132,8 @@ public class MainActivity extends Activity implements  CreateNdefMessageCallback
         //String text = ("Beam me up, Android!\n\n" +
         //        "Beam Time: " + System.currentTimeMillis());
 		loadData(this);
-        JSONObject userData = new JSONObject(User.currentUser.details);
+        if (User.currentUser == null || User.currentUser.details == null) return null;
+		JSONObject userData = new JSONObject(User.currentUser.details);
         String text = userData.toString();
         NdefMessage msg = new NdefMessage(
         		new NdefRecord[] { NdefRecord.createMime("application/vsp.networker", text.getBytes())
@@ -171,6 +172,10 @@ public class MainActivity extends Activity implements  CreateNdefMessageCallback
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		if(User.currentUser == null || User.currentUser.details == null ||
+				User.currentUser.details.get(User.USER_NAME) == null || 
+				"".equals(User.currentUser.details.get(User.USER_NAME)))
+			firstTime = true;
 		if(firstTime) profilePageButton(null);
 	}
 	

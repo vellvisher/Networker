@@ -2,14 +2,14 @@ package vsp.networker.data;
 
 import java.util.HashMap;
 
-public class User {
+public class User implements java.io.Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7147071047698604994L;
 	public static User currentUser;
 	static {
 		currentUser = new User();
-		
-//		AccountManager am = AccountManager.get(this); // "this" references the current Context
-
-//		Account[] accounts = am.getAccountsByType("com.google");
 	}
 	
 	public static final String USER_NAME = "name";

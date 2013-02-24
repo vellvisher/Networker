@@ -3,11 +3,13 @@ package vsp.networker;
 import java.util.HashMap;
 
 import vsp.networker.data.User;
-import android.os.Bundle;
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.text.Editable;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -20,6 +22,35 @@ public class Profile extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profile);
+		AccountManager am = AccountManager.get(this); // "this" references the current Context
+
+		Account[] accounts = am.getAccountsByType("com.google");
+		if(accounts.length >= 1) {
+			Account account = accounts[0];
+			EditText emailField = (EditText) findViewById(R.id.editText2);
+			if(account.name.contains("gmail")) emailField.setText(account.name);
+		}
+		getUserDetails();
+	}
+	
+	public void getUserDetails() {
+		System.out.println("AHENTAHU");
+		Cursor c = this.getContentResolver().query(ContactsContract.Profile.CONTENT_URI, null, null, null, null);
+		int count = c.getCount();
+		String[] columnNames = c.getColumnNames();
+		boolean b = c.moveToFirst();
+		int position = c.getPosition();
+		String displayName = "";
+		if (count == 1 && position == 0) {
+		    for (int j = 0; j < columnNames.length; j++) {
+		        String columnName = columnNames[j];
+		        String columnValue = c.getString(c.getColumnIndex(columnName));
+		        if("display_name".equals(columnName)) displayName = columnValue;
+		    }
+		}
+		EditText nameField = (EditText) findViewById(R.id.editText1);
+		if (!"".equals(displayName)) nameField.setText(displayName);
+		c.close();
 	}
 
 	@Override
