@@ -1,5 +1,8 @@
 package vsp.networker;
 
+import java.util.ArrayList;
+
+import vsp.networker.data.EventList;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,13 +13,20 @@ import android.widget.TextView;
 
 public class ImageAdapter extends BaseAdapter {
     private Context context;
-
+    private ArrayList<String> arrList;
+    
+    private Integer folderImage = R.drawable.android_folder;   
     public ImageAdapter(Context c) {
         context = c;
+        arrList=EventList.getList();
     }
-
+  
+    public String getEventName(int position) {
+    	return arrList.get(position);
+    }
+    
     public int getCount() {
-        return mThumbIds.length;
+        return arrList.size();
     }
 
     public Object getItem(int position) {
@@ -30,7 +40,7 @@ public class ImageAdapter extends BaseAdapter {
     // create a new ImageView for each item referenced by the Adapter
     public View getView(int position, View convertView, ViewGroup parent) {
     	View MyView = convertView;
-
+       
     	if (convertView == null) {
     	/* we define the view that will display on the grid */
 
@@ -39,32 +49,19 @@ public class ImageAdapter extends BaseAdapter {
 
     	// Add The Text!!!
     	TextView tv1 = (TextView) MyView.findViewById(R.id.text_item);
-    	tv1.setText("Title" + position);
+    	tv1.setText(getEventName(position));
 
  
     	// Add The Image!!!
     	ImageView iv = (ImageView) MyView.findViewById(R.id.image_item);
-    	iv.setImageResource(mThumbIds[position]);
+    	iv.setImageResource(folderImage);
     	}
 
     	return MyView;
     }
 
-    // references to our images
-    private Integer[] mThumbIds = {
-            R.drawable.sample_2, 
-            R.drawable.sample_3,
-            R.drawable.sample_4,
-            R.drawable.sample_5,
-            R.drawable.sample_5,
-            
-    };
+  
     
-    private String[] mThumbtext = {
-            "This Week",
-            "C&EN Store",
-            "My Library", 
-            "Latest News",
-            "More"
-    };
+    
+ 
 }

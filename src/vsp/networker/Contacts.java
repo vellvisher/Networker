@@ -1,10 +1,8 @@
 package vsp.networker;
 
-import java.util.ArrayList;
-
+import vsp.networker.data.EventList;
 import android.os.Bundle;
 import android.app.Activity;
-import android.text.Editable;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,14 +14,16 @@ public class Contacts extends Activity
 {
 	    
     private ClearableEditText clrObj = null;
-        
+    GridView gridview;
+    private ImageAdapter imgAdapter;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_contacts);
 		
-		GridView gridview = (GridView) findViewById(R.id.gridView1);
-	    gridview.setAdapter(new ImageAdapter(this));
+	    gridview = (GridView) findViewById(R.id.gridView1);
+		imgAdapter = new ImageAdapter(this);
+	    gridview.setAdapter(imgAdapter);
 
 	    gridview.setOnItemClickListener(new OnItemClickListener() {
 	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
@@ -42,8 +42,10 @@ public class Contacts extends Activity
 	public void addFolder(View view) {
 		
 	clrObj =(ClearableEditText) findViewById(R.id.edit_text_clearable);
-	Editable text = clrObj.getText();
-	
+	String text = clrObj.getText().toString();
+    EventList.getList().add(text);
+    imgAdapter.notifyDataSetChanged();
+    gridview.setAdapter(imgAdapter);
 	clrObj.emptyText();
 	
 	}
