@@ -62,14 +62,17 @@
           android:text="@string/professional_details_output" />
 
        <EditText
+         android:id="@+id/designation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/designation_input" />
         <EditText
+            android:id="@+id/department"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/department_input" />
          <EditText
+             android:id="@+id/company_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/company_name_input" />
@@ -95,6 +98,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/facebook_account" />
         <EditText
+             android:id="@+id/twitter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/twitter_account" />

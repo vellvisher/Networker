@@ -1,13 +1,21 @@
 package vsp.networker;
 
+import java.util.HashMap;
+
+import vsp.networker.data.User;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.text.Editable;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.widget.EditText;
 
 public class Profile extends Activity {
 
+	LayoutInflater inflater = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -22,7 +30,18 @@ public class Profile extends Activity {
 	}
 	
 	public void submitButton(View view) {
+	
+		String name =  findViewById(R.id.editText1).toString();
+		String email =  findViewById(R.id.editText2).toString();
+		String phoneNo =  findViewById(R.id.editText3).toString();
+		String designation =  findViewById(R.id.designation).toString();
+		String department =  findViewById(R.id.department).toString();
+		String companyName =  findViewById(R.id.company_name).toString();
+		String companyAddress =  findViewById(R.id.editText4).toString();
 		Intent create_event = new Intent(this,Contacts.class);
+		HashMap<String,String> profDetails= User.getProfessionalDetailsMap(designation, department,
+			companyName,companyAddress);
+		User usr = new User(name,email,phoneNo,"",profDetails);
 		startActivity(create_event);
 	}
 }

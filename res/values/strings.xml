@@ -38,5 +38,7 @@
     <string name="twitter_button">Twiiter</string>
     <string name="edit_text_social">Enter authorization code</string>
     <string name="submitButton">Submit</string>
-    
+    <string name="title_activity_twitter">TwitterActivity</string>
+    <string name="title_activity_linked_in">LinkedInActivity</string>
+
 </resources>

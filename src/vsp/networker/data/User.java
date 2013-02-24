@@ -29,7 +29,7 @@ public class User {
 	
 	public HashMap<String, String> details;
 	
-	public HashMap<String, String> getProfessionalDetailsMap(String designation, String department,
+	public static HashMap<String, String> getProfessionalDetailsMap(String designation, String department,
 			String companyName, String companyAddress) {
 		HashMap<String, String> profDetails = new HashMap<String, String>();
 		profDetails.put(COMPANY_DESIGNATION, designation);

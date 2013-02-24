@@ -14,8 +14,8 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
+        android:icon="@drawable/network"
+		android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
             android:name="vsp.networker.MainActivity"
@@ -67,8 +67,15 @@
             <category android:name="android.intent.category.BROWSABLE" /> 
             <data android:scheme="x-oauthflow-linkedin" android:host="callback" />
         </activity>
+        <activity
+            android:name="vsp.networker.TwitterActivity"
+            android:label="@string/title_activity_twitter" >
+        </activity>
+        <activity
+            android:name="vsp.networker.LinkedInActivity"
+            android:label="@string/title_activity_linked_in" >
+        </activity>
     </application>
 <uses-permission android:name="android.permission.INTERNET"/>
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 </manifest>
