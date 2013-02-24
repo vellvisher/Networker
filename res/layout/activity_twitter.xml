@@ -8,9 +8,19 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".TwitterActivity" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
-
+     <Button android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:text="@string/twitter_button"
+        	android:onClick="authenticateTwitter"/>
+	<Button android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:text="@string/submitButton"
+        	android:onClick="authCodeEntered"
+        	android:id="@+id/submitButton"
+        	android:layout_marginTop="100dp"/>
+	<EditText android:layout_width="wrap_content"
+	    	  android:layout_height="wrap_content"
+	    	  android:hint="@string/edit_text_social"
+	    	  android:id="@+id/auth_code_text_field"
+	    	  android:layout_marginTop="200dp"/>
 </RelativeLayout>

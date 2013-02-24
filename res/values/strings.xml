@@ -35,7 +35,9 @@
     <string name="create_event">Event Name</string>
     <string name="title_activity_social">SocialActivity</string>
     <!-- Social Page -->
-    <string name="twitter_button">Twiiter</string>
+    <string name="authorize_linkedin_button">Authorize LinkedIn</string>
+    
+    <string name="twitter_button">Authorize Twitter</string>
     <string name="edit_text_social">Enter authorization code</string>
     <string name="submitButton">Submit</string>
     <string name="title_activity_twitter">TwitterActivity</string>

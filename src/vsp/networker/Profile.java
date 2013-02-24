@@ -3,11 +3,14 @@ package vsp.networker;
 import java.util.HashMap;
 
 import vsp.networker.data.User;
-import android.os.Bundle;
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.text.Editable;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MotionEvent;
@@ -25,6 +28,7 @@ public class Profile extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profile);
+
 		
 		scrollBg = (ScrollView)findViewById(R.id.scrollview);
 		scrollBg.setOnTouchListener(new OnTouchListener() {
@@ -37,7 +41,35 @@ public class Profile extends Activity {
 	        }
 	    });
 		
-}
+		AccountManager am = AccountManager.get(this); // "this" references the current Context
+
+		Account[] accounts = am.getAccountsByType("com.google");
+		if(accounts.length >= 1) {
+			Account account = accounts[0];
+			EditText emailField = (EditText) findViewById(R.id.editText2);
+			if(account.name.contains("gmail")) emailField.setText(account.name);
+		}
+		getUserDetails();
+	}
+	
+	public void getUserDetails() {
+		Cursor c = this.getContentResolver().query(ContactsContract.Profile.CONTENT_URI, null, null, null, null);
+		int count = c.getCount();
+		String[] columnNames = c.getColumnNames();
+		boolean b = c.moveToFirst();
+		int position = c.getPosition();
+		String displayName = "";
+		if (count == 1 && position == 0) {
+		    for (int j = 0; j < columnNames.length; j++) {
+		        String columnName = columnNames[j];
+		        String columnValue = c.getString(c.getColumnIndex(columnName));
+		        if("display_name".equals(columnName)) displayName = columnValue;
+		    }
+		}
+		EditText nameField = (EditText) findViewById(R.id.editText1);
+		if (!"".equals(displayName)) nameField.setText(displayName);
+		c.close();
+	}
 
 
 	@Override
@@ -49,17 +81,46 @@ public class Profile extends Activity {
 	
 	public void submitButton(View view) {
 	
-		String name =  findViewById(R.id.editText1).toString();
+		String name =  findViewById(R.id.editText1).toString().trim();
+		User.currentUser.details.put(User.USER_NAME, name);
+		
+		String firstName = name.substring(0, name.lastIndexOf(' '));
+		User.currentUser.details.put(User.USER_FIRST_NAME, firstName);
+		
+		String lastName = name.substring(name.lastIndexOf(' ')+1);
+		User.currentUser.details.put(User.USER_LAST_NAME, lastName);
+
 		String email =  findViewById(R.id.editText2).toString();
+		User.currentUser.details.put(User.USER_EMAIL, email);
+
 		String phoneNo =  findViewById(R.id.editText3).toString();
+		User.currentUser.details.put(User.USER_PHONE_NUMBER, phoneNo);
+
 		String designation =  findViewById(R.id.designation).toString();
 		String department =  findViewById(R.id.department).toString();
 		String companyName =  findViewById(R.id.company_name).toString();
 		String companyAddress =  findViewById(R.id.editText4).toString();
-		Intent create_event = new Intent(this,Contacts.class);
+
 		HashMap<String,String> profDetails= User.getProfessionalDetailsMap(designation, department,
 			companyName,companyAddress);
-		User usr = new User(name,email,phoneNo,"",profDetails);
+		//User usr = new User(name, email, phoneNo, "", profDetails);
+		for(String key : profDetails.keySet()) {
+			User.currentUser.details.put(key, profDetails.get(key));
+		}
+		MainActivity.saveData(this);
+		Intent create_event = new Intent(this, Contacts.class);
 		startActivity(create_event);
+	}
+	
+	public void twitterActivity(View view) {
+		Intent profileIntent = new Intent(this, TwitterActivity.class);
+		startActivity(profileIntent);
+		
+	}
+	
+	public void linkedInActivity(View view) {
+		Intent profileIntent = new Intent(this, LinkedInActivity.class);
+		startActivity(profileIntent);
+		
 	}
 }
