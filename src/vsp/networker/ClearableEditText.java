@@ -1,6 +1,7 @@
 package vsp.networker;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
@@ -42,8 +43,28 @@ void initViews()
 	edit_text = (EditText) findViewById(R.id.clearable_edit);
 	btn_clear = (ImageButton) findViewById(R.id.clearable_button_clear);
 	btn_clear.setVisibility(RelativeLayout.INVISIBLE);
+	setFontColor();
 	clearText();
 	showHideClearButton();
+}
+
+private void setFontColor() {
+	edit_text.setOnFocusChangeListener(new OnFocusChangeListener() {
+
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            if (hasFocus) {
+                v.setBackgroundColor(Color.WHITE);
+                ((EditText) v).setTextColor(Color.BLACK);
+            } else {
+
+                v.setBackgroundColor(Color.WHITE);
+                ((EditText) v).setTextColor(Color.BLACK);
+            }
+
+        }
+    });
+	
 }
 
 void clearText()

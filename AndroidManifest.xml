@@ -78,6 +78,14 @@
             android:name="vsp.networker.LinkedInActivity"
             android:label="@string/title_activity_linked_in" >
         </activity>
+        <activity
+            android:name="vsp.networker.DisplayList"
+            android:label="@string/title_activity_display_list" >
+        </activity>
+        <activity
+            android:name="vsp.networker.ListViewLoader"
+            android:label="@string/title_activity_list_view_loader" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

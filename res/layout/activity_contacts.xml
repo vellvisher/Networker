@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
+    android:background="#000000"
     android:layout_height="wrap_content" >
 
    <ImageButton
     android:id="@+id/imageButton1"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="15dp"
-    android:layout_marginRight="10dp"
+    android:layout_marginTop="5dp"
     android:layout_alignParentRight="true"
     android:layout_marginLeft="11dp"
-    android:background="@android:color/transparent"
     android:onClick="addFolder"
-    android:src="@android:drawable/ic_input_add" />
+    android:background="@drawable/plus"
+    android:src="@drawable/plus"></ImageButton>
     
    <vsp.networker.ClearableEditText
     android:id="@+id/edit_text_clearable"
@@ -43,7 +43,7 @@
     android:horizontalSpacing="10dp"
     android:verticalSpacing="10dp"
     android:gravity="center"
-    android:background="@android:color/darker_gray"
+    android:background="#000000"
     android:stretchMode="columnWidth" >  
     </GridView>
 
