@@ -67,65 +67,41 @@ public class MainActivity extends Activity implements  CreateNdefMessageCallback
 		System.out.println("resume");
 		Parcelable[] rawMsgs;
 		System.out.println(getIntent().getAction());
-		if((rawMsgs = getIntent().getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)) != null) {
+		if(NfcAdapter.ACTION_NDEF_DISCOVERED == getIntent().getAction()) {
 			//Intent intent = new Intent(this, SendPage.class);
 			//startActivity(intent);
+			rawMsgs = getIntent().getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
 			System.out.println("nirvana");
 			TextView textView = (TextView) findViewById(R.id.hello_view);
 			NdefMessage msg = (NdefMessage) rawMsgs[0];
 			String data = new String(msg.getRecords()[0].getPayload());
 			System.out.println("Got this - " +new String(msg.getRecords()[0].getPayload()));
+			JSONObject otherUserObject;
 			textView.setText(new String(msg.getRecords()[0].getPayload()));	
 			try {
-				final JSONObject otherUserObject = new JSONObject(data);
+				otherUserObject = new JSONObject(data);
 				if(otherUserObject.get(User.TWITTER_ID) != null) {
-					new Thread(new Runnable() {
-						
-						@Override
-						public void run() {
-							try {
-								TwitterActivity.followContact((String)otherUserObject.get(User.TWITTER_ID));
-							} catch (JSONException e) {
+					System.out.println("Going to follow");
+					TwitterActivity.followContact((String)otherUserObject.get(User.TWITTER_ID));
+							} 
+			} catch (JSONException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
-						}
-					}).start();
-				}
-				if(otherUserObject.get(User.LINKEDIN_ID) != null) {
-					//Follow on twitter using api
-					//LinkedIn
-					new Thread(new Runnable() {
-						
-						@Override
-						public void run() {
-							try {
+		}
+			
+/*			try {
+				otherUserObject = new JSONObject(data);
+							
+			if(otherUserObject.get(User.LINKEDIN_ID) != null) {
 								LinkedInActivity.connectWithPerson((String)otherUserObject.get(User.USER_FIRST_NAME), 
 										(String)otherUserObject.get(User.USER_LAST_NAME), (String)otherUserObject.get(User.USER_EMAIL));
-							} catch (JSONException e) {
+							}}catch (JSONException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
-						}
-					});
 				}
-				
-				/*
-				// add user details to android event
-				ContentValues values = new ContentValues();
-	            values.put(Data.RAW_CONTACT_ID, 001);
-	            values.put(Data.MIMETYPE, Phone.CONTENT_ITEM_TYPE);
-	            values.put(Phone.NUMBER, otherUserObject.getString(User.USER_PHONE_NUMBER));
-	            values.put(Phone.TYPE, Phone.TYPE_CUSTOM);
-	            values.put(Phone.LABEL, "");
-	            Uri dataUri = getContentResolver().insert(android.provider.ContactsContract.Data.CONTENT_URI, values);
-				*/
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	}
+*/		}
 
 	@Override
 	public NdefMessage createNdefMessage(NfcEvent arg0) {

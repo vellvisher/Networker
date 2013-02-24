@@ -61,7 +61,8 @@ public class Profile extends Activity {
 	
 	public void submitButton(View view) {
 	
-		String name =  findViewById(R.id.editText1).toString().trim();
+		String name =  ((EditText)findViewById(R.id.editText1)).getText().toString().trim();
+		System.out.println("NAME:"+name);
 		User.currentUser.details.put(User.USER_NAME, name);
 		
 		String firstName = name.substring(0, name.lastIndexOf(' '));
@@ -70,16 +71,16 @@ public class Profile extends Activity {
 		String lastName = name.substring(name.lastIndexOf(' ')+1);
 		User.currentUser.details.put(User.USER_LAST_NAME, lastName);
 
-		String email =  findViewById(R.id.editText2).toString();
+		String email =  ((EditText)findViewById(R.id.editText2)).getText().toString().trim();
 		User.currentUser.details.put(User.USER_EMAIL, email);
 
-		String phoneNo =  findViewById(R.id.editText3).toString();
+		String phoneNo =  ((EditText)findViewById(R.id.editText3)).getText().toString().trim();
 		User.currentUser.details.put(User.USER_PHONE_NUMBER, phoneNo);
 
-		String designation =  findViewById(R.id.designation).toString();
-		String department =  findViewById(R.id.department).toString();
-		String companyName =  findViewById(R.id.company_name).toString();
-		String companyAddress =  findViewById(R.id.editText4).toString();
+		String designation =  ((EditText)findViewById(R.id.designation)).getText().toString().trim();
+		String department =  ((EditText)findViewById(R.id.department)).getText().toString().trim();
+		String companyName =  ((EditText)findViewById(R.id.company_name)).getText().toString().trim();
+		String companyAddress =  ((EditText)findViewById(R.id.editText4)).getText().toString().trim();
 
 		HashMap<String,String> profDetails= User.getProfessionalDetailsMap(designation, department,
 			companyName,companyAddress);

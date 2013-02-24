@@ -28,7 +28,7 @@ public class TwitterActivity extends Activity implements Runnable
 {
 
 	private static final String PROTECTED_RESOURCE_URL = "https://api.twitter.com/1/account/verify_credentials.json";
-	private static final String FOLLOWING_RESOURCE_URL = "https://api.twitter.com/1.1/friendships/create.json";
+	private static final String FOLLOWING_RESOURCE_URL = "https://api.twitter.com/1/friendships/create.json";
 	private String verifierValue;
 	private static OAuthService service;
 	private Token requestToken;
@@ -162,25 +162,35 @@ public class TwitterActivity extends Activity implements Runnable
 		
 	}
 	
-	public static void followContact(String ID){
+	public static void followContact(final String ID){
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				try {
+
 		service = new ServiceBuilder()
         .provider(TwitterApi.class)
         .apiKey("gg6IacmVpkxQ1kQV1Y7yw")
         .apiSecret("4Nm7kPengNHT0Oej518JCECkqVMwPg79ByFOxOVU")
         .build();
 
-		OAuthRequest request = new OAuthRequest(Verb.GET, FOLLOWING_RESOURCE_URL);
+		OAuthRequest request = new OAuthRequest(Verb.POST, FOLLOWING_RESOURCE_URL);
 		request.addBodyParameter("user_id", ID);
 		request.addBodyParameter("follow", "true");
 		String userAccessToken = User.currentUser.socialMediaKeys.get(User.TWITTER).accessToken;
 		String userSecretKey = User.currentUser.socialMediaKeys.get(User.TWITTER).secretKey;
+		System.out.println(ID + "AAAAA A" +userAccessToken + " " + userSecretKey);
 		Token accessToken = new Token(userAccessToken, userSecretKey);
 		service.signRequest(accessToken, request);
 		Response response = request.send();
 		System.out.println("Got it! Lets see what we found...");
 		System.out.println();
 		System.out.println(response.getBody());
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}}).start();
 	}
-
-
 }

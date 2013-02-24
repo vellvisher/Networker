@@ -170,42 +170,46 @@ System.out.println();
 		
 	}
 	
-	public static void connectWithPerson(String first, String last, String email){
-		OAuthService service = new ServiceBuilder()
-        .provider(LinkedInApi.withScopes("r_emailaddress+r_network+w_messages"))
-        .apiKey("q3w3wlvc0ii5")
-        .apiSecret("bfXAk13oRgfBG6aP")
-        .build();
-		
-	    OAuthRequest request = new OAuthRequest(Verb.POST, FOLLOWING_RESOURCE_URL);
-	    String userAccessToken = User.currentUser.socialMediaKeys.get(User.LINKEDIN).accessToken;
-		String userSecretKey = User.currentUser.socialMediaKeys.get(User.LINKEDIN).secretKey;
-		Token accessToken = new Token(userAccessToken, userSecretKey);
-	    request.addHeader("Content-Type", "text/xml");
-	    String xmlbody = "<?xml version='1.0' encoding='UTF-8'?>" + 
-	    			"<mailbox-item>"+
-	  "<recipients>" +
-	    "<recipient>" +
-	      "<person path=\"/people/email="+email+"\">" +
-	        "<first-name>"+first+"</first-name>" +
-	        "<last-name>"+last+"</last-name>" +
-	      "</person>" + 
-	    "</recipient>" +
-	  "</recipients>" +
-	  "<subject>Invitation to Connect</subject>" +
-	  "<body>Please join my professional network o n LinkedIn.</body>"+
-	  "<item-content>"+
-	    "<invitation-request>"+
-	      "<connect-type>friend</connect-type>"+
-	    "</invitation-request>" +
-	  "</item-content>"+
-	"</mailbox-item>";
-		request.addPayload(xmlbody );
-	    service.signRequest(accessToken, request);
-	    Response response = request.send();
-
-	
-	
+	public static void connectWithPerson(final String first, final String last, final String email){
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				OAuthService service = new ServiceBuilder()
+		        .provider(LinkedInApi.withScopes("r_emailaddress+r_network+w_messages"))
+		        .apiKey("q3w3wlvc0ii5")
+		        .apiSecret("bfXAk13oRgfBG6aP")
+		        .build();
+				
+			    OAuthRequest request = new OAuthRequest(Verb.POST, FOLLOWING_RESOURCE_URL);
+			    String userAccessToken = User.currentUser.socialMediaKeys.get(User.LINKEDIN).accessToken;
+				String userSecretKey = User.currentUser.socialMediaKeys.get(User.LINKEDIN).secretKey;
+				Token accessToken = new Token(userAccessToken, userSecretKey);
+			    request.addHeader("Content-Type", "text/xml");
+			    String xmlbody = "<?xml version='1.0' encoding='UTF-8'?>" + 
+			    			"<mailbox-item>"+
+			  "<recipients>" +
+			    "<recipient>" +
+			      "<person path=\"/people/email="+email+"\">" +
+			        "<first-name>"+first+"</first-name>" +
+			        "<last-name>"+last+"</last-name>" +
+			      "</person>" + 
+			    "</recipient>" +
+			  "</recipients>" +
+			  "<subject>Invitation to Connect</subject>" +
+			  "<body>Please join my professional network o n LinkedIn.</body>"+
+			  "<item-content>"+
+			    "<invitation-request>"+
+			      "<connect-type>friend</connect-type>"+
+			    "</invitation-request>" +
+			  "</item-content>"+
+			"</mailbox-item>";
+				request.addPayload(xmlbody );
+			    service.signRequest(accessToken, request);
+			    Response response = request.send();
+				
+			}
+		});
 	}
 
 
