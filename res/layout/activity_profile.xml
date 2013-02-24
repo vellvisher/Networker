@@ -93,19 +93,17 @@
           android:textStyle="bold"
           android:text="@string/social_media_details" />
 
-       <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/facebook_account" />
-        <EditText
+      	<Button
              android:id="@+id/twitter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/twitter_account" />
-         <EditText
+        android:text="@string/twitter_account" 
+        android:onClick="twitterActivity"/>
+         <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/linkedin_account" /> 
+        android:text="@string/linkedin_account"
+        android:onClick="linkedInActivity" /> 
           <Button
               android:id="@+id/button1"
               android:layout_width="80dp"
