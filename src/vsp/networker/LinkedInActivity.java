@@ -164,7 +164,12 @@ System.out.println();
 		
 	}
 	
-	public void connectWithPerson(String first, String last, String email){
+	public static void connectWithPerson(String first, String last, String email){
+		OAuthService service = new ServiceBuilder()
+        .provider(LinkedInApi.withScopes("r_emailaddress+r_network+w_messages"))
+        .apiKey("q3w3wlvc0ii5")
+        .apiSecret("bfXAk13oRgfBG6aP")
+        .build();
 		
 	    OAuthRequest request = new OAuthRequest(Verb.POST, FOLLOWING_RESOURCE_URL);
 	    String userAccessToken = User.currentUser.socialMediaKeys.get(User.LINKEDIN).accessToken;

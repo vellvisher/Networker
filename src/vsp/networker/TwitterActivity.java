@@ -30,7 +30,7 @@ public class TwitterActivity extends Activity implements Runnable
 	private static final String PROTECTED_RESOURCE_URL = "https://api.twitter.com/1/account/verify_credentials.json";
 	private static final String FOLLOWING_RESOURCE_URL = "https://api.twitter.com/1.1/friendships/create.json";
 	private String verifierValue;
-	private OAuthService service;
+	private static OAuthService service;
 	private Token requestToken;
 	private boolean returnFromBrowser;
 	private Verifier verifier;
@@ -162,8 +162,13 @@ public class TwitterActivity extends Activity implements Runnable
 		
 	}
 	
-	public void followContact(String ID){
-		
+	public static void followContact(String ID){
+		service = new ServiceBuilder()
+        .provider(TwitterApi.class)
+        .apiKey("gg6IacmVpkxQ1kQV1Y7yw")
+        .apiSecret("4Nm7kPengNHT0Oej518JCECkqVMwPg79ByFOxOVU")
+        .build();
+
 		OAuthRequest request = new OAuthRequest(Verb.GET, FOLLOWING_RESOURCE_URL);
 		request.addBodyParameter("user_id", ID);
 		request.addBodyParameter("follow", "true");
@@ -175,9 +180,6 @@ public class TwitterActivity extends Activity implements Runnable
 		System.out.println("Got it! Lets see what we found...");
 		System.out.println();
 		System.out.println(response.getBody());
-		
-	
-	
 	}
 
 

@@ -1,11 +1,14 @@
 package vsp.networker;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OptionalDataException;
 import java.io.StreamCorruptedException;
+import java.util.HashMap;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -74,15 +77,37 @@ public class MainActivity extends Activity implements  CreateNdefMessageCallback
 			System.out.println("Got this - " +new String(msg.getRecords()[0].getPayload()));
 			textView.setText(new String(msg.getRecords()[0].getPayload()));	
 			try {
-				JSONObject otherUserObject = new JSONObject(data);
+				final JSONObject otherUserObject = new JSONObject(data);
 				if(otherUserObject.get(User.TWITTER_ID) != null) {
-					//Follow on twitter using api
-					// oooo.followContact(twitterId);
+					new Thread(new Runnable() {
+						
+						@Override
+						public void run() {
+							try {
+								TwitterActivity.followContact((String)otherUserObject.get(User.TWITTER_ID));
+							} catch (JSONException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+					}).start();
 				}
 				if(otherUserObject.get(User.LINKEDIN_ID) != null) {
 					//Follow on twitter using api
 					//LinkedIn
-					//oooo.followContact(User.USER_FIRST_NAME, User.USER_LAST_NAME, USER.USER_EMAIL);
+					new Thread(new Runnable() {
+						
+						@Override
+						public void run() {
+							try {
+								LinkedInActivity.connectWithPerson((String)otherUserObject.get(User.USER_FIRST_NAME), 
+										(String)otherUserObject.get(User.USER_LAST_NAME), (String)otherUserObject.get(User.USER_EMAIL));
+							} catch (JSONException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+					});
 				}
 				
 				/*
@@ -106,6 +131,7 @@ public class MainActivity extends Activity implements  CreateNdefMessageCallback
 	public NdefMessage createNdefMessage(NfcEvent arg0) {
         //String text = ("Beam me up, Android!\n\n" +
         //        "Beam Time: " + System.currentTimeMillis());
+		loadData(this);
         JSONObject userData = new JSONObject(User.currentUser.details);
         String text = userData.toString();
         NdefMessage msg = new NdefMessage(
@@ -125,18 +151,38 @@ public class MainActivity extends Activity implements  CreateNdefMessageCallback
 		startActivity(socialActivity);
 	}
 	
-	public static void loadData(Context context) throws StreamCorruptedException, IOException, ClassNotFoundException {
-		FileInputStream fis = context.openFileInput(USER_DATA_FILENAME);
-		ObjectInputStream is = new ObjectInputStream(fis);
-		User.currentUser = (User) is.readObject();
-		is.close();
+	public void loadData(Context context) {
+		FileInputStream fis;
+		boolean firstTime = false;
+		try {
+			fis = context.openFileInput(USER_DATA_FILENAME);
+			ObjectInputStream is = new ObjectInputStream(fis);
+			User.currentUser = (User) is.readObject();
+			is.close();
+		} catch (FileNotFoundException e) {
+			User.currentUser = new User();
+			User.currentUser.details = new HashMap<String, String>();
+			saveData(this);
+			firstTime = true;
+		} catch (OptionalDataException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		if(firstTime) profilePageButton(null);
 	}
 	
-	public static void saveData(Context context) throws IOException {
-		FileOutputStream fos = context.openFileOutput(USER_DATA_FILENAME, Context.MODE_PRIVATE);
-		ObjectOutputStream os = new ObjectOutputStream(fos);
-		os.writeObject(User.currentUser);
-		os.close();
+	public void saveData(Context context){
+		try {
+			FileOutputStream fos = context.openFileOutput(USER_DATA_FILENAME, Context.MODE_PRIVATE);
+			ObjectOutputStream os = new ObjectOutputStream(fos);
+			os.writeObject(User.currentUser);
+			os.close();
+		} catch (IOException e) {
+			// TODO: handle exception
+		}
 	}
 
 }
