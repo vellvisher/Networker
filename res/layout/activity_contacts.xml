@@ -12,6 +12,7 @@
     android:layout_alignParentRight="true"
     android:layout_marginLeft="11dp"
     android:background="@android:color/transparent"
+    android:onClick="addFolder"
     android:src="@android:drawable/ic_input_add" />
     
    <vsp.networker.ClearableEditText
@@ -19,12 +20,31 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content" />
 
-    <GridView
+  <!--   <GridView
         android:id="@+id/gridView1"
         android:layout_below="@+id/edit_text_clearable"
         android:layout_width="match_parent"
         android:layout_height="512dp"
-        android:numColumns="3" >
+        android:numColumns="3" 
+        android:gravity="center"
+        android:stretchMode="columnWidth">
+    </GridView> -->
+    
+    
+    
+    
+    <GridView 
+    android:id="@+id/gridView1"
+    android:layout_below="@+id/edit_text_clearable"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:numColumns="auto_fit"
+    android:columnWidth="90dp"
+    android:horizontalSpacing="10dp"
+    android:verticalSpacing="10dp"
+    android:gravity="center"
+    android:background="@android:color/darker_gray"
+    android:stretchMode="columnWidth" >  
     </GridView>
 
 </RelativeLayout>

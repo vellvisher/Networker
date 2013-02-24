@@ -89,9 +89,14 @@ public void afterTextChanged(Editable s)
 	});
 }
 
-public Editable getText()
+public  Editable getText()
 {
 	Editable text = edit_text.getText();
 	return text;
 }
+
+public void emptyText() {
+	edit_text.setText("");
+}
+
 }
