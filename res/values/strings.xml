@@ -34,5 +34,7 @@
     <!-- editable-text -->
     <string name="create_event">Event Name</string>
     <string name="title_activity_social">SocialActivity</string>
-
+    <!-- Social Page -->
+    <string name="twitter_button">Twiiter</string>
+    
 </resources>
